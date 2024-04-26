@@ -1,75 +1,74 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 struct node {
-	int dado;
-	struct node *prox;
+    int dado;
+    struct node *prox;
 };
 
 struct descritor{
-	struct node *i, *f;
-	int n;
+    struct node *i, *f;
+    int n;
 };
 
+// Função para inserir um nó na lista ordenadamente
+void inserirOrdenado(struct descritor *d, int valor) {
+    struct node *novo = malloc(sizeof(struct node));
+    novo->dado = valor;
+    novo->prox = NULL;
+
+    // Se a lista estiver vazia ou o valor for menor que o primeiro elemento
+    if (d->i == NULL || valor < d->i->dado) {
+        novo->prox = d->i;
+        d->i = novo;
+    } else {
+        struct node *atual = d->i;
+        // Encontra o ponto de inserção na lista
+        while (atual->prox != NULL && atual->prox->dado < valor) {
+            atual = atual->prox;
+        }
+        novo->prox = atual->prox;
+        atual->prox = novo;
+    }
+    d->n++;
+}
+
 int main(int argc, char *argv[]) {
-	int i,nos,med;
-	struct node *p, *q,*lista;
-	printf("Quantos nos deseja inserir? ");
-	scanf("%i", &nos);
-	
-	
-	struct descritor *d;
-	d = malloc(sizeof(struct descritor));
-	d->i = NULL;
-	d->f = NULL;
-	d->n = 0;
-	
-	srand(time(NULL));
-	
-	
+    int i = 0, nos;
+    struct node *p, *lista;
+    printf("Quantos nos deseja inserir? ");
+    scanf("%i", &nos);
+    
+    struct descritor *d;
+    d = malloc(sizeof(struct descritor));
+    d->i = NULL;
+    d->f = NULL;
+    d->n = 0;
+    
+    srand(time(NULL));
+    
+    do {
+        p = malloc(sizeof(struct node));
+        p->dado = rand() % 99;
+        p->prox = lista;
+        lista = p;
 
-	do{
-		p = malloc(sizeof(struct node));
-		p->dado=rand()%99;
-		p->prox = lista;
-		lista=p;
-		//Inserir numa lista com descritor em ordem:
-	    
-		//Transferir para ordem crescente 
-		//Jogar para lista com descritor.
-		//Fazer media como int
-		
-	    for (i=0;i++;){
-	        p=p->dado;
-        //Buscar lista toda e deletar numero imediatamente superior a media.
+        // Inserir o elemento na lista ordenadamente
+        inserirOrdenado(d, p->dado);
 
-	        if (p->dado>med){
-	            free(p->dado);
-	            free(p->prox);
-	            break;
-	        }
-	        
-        //Organizar lista novamente, usando-se as funções da lista com descritor
-	    }
-	   //Organizar lista novamente, usando-se as funções da lista com descritor
+        i++;
+        printf("%i ", p->dado);
+    } while (i < nos);
 
-		/*if(d->n==0){
-			d->i = p;
-			d->f = p;
-			d->n = 1;
-		}
-		else{
-			q = d->f;
-			q->prox = p;
-			d->f = p;
-			d->n++;			
-		*/
-		i++;
-        printf("%i ",p->dado);
+    printf("\nLista ordenada:\n");
+    // Imprimir a lista ordenada
+    struct node *temp = d->i;
+    while (temp != NULL) {
+        printf("%i ", temp->dado);
+        temp = temp->prox;
+    }
+    printf("\n");
 
-	}while(i<nos);
-	
-	return 0;
+    return 0;
 }
