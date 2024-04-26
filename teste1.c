@@ -34,8 +34,15 @@ void inserirOrdenado(struct descritor *d, int valor) {
     d->n++;
 }
 
+        //Transferir para ordem crescente CERTO
+		//Jogar para lista com descritor. CERTO
+        
+		//Fazer media como int INCOMPLETO
+		//Buscar lista toda e deletar numero imediatamente superior a media. INCOMPLETO
+		//Reordena a lista novamente. INCOMPLETO
+
 int main(int argc, char *argv[]) {
-    int i = 0, nos;
+    int i = 0, nos,media;
     struct node *p, *lista;
     printf("Quantos nos deseja inserir? ");
     scanf("%i", &nos);
