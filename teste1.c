@@ -34,15 +34,38 @@ void inserirOrdenado(struct descritor *d, int valor) {
     d->n++;
 }
 
-        //Transferir para ordem crescente CERTO
-		//Jogar para lista com descritor. CERTO
-        
-		//Fazer media como int INCOMPLETO
-		//Buscar lista toda e deletar numero imediatamente superior a media. INCOMPLETO
-		//Reordena a lista novamente. INCOMPLETO
+// Função para calcular o valor médio dos nós na lista
+float calcularMedia(struct descritor *d) {
+    struct node *temp = d->i;
+    int soma = 0;
+    while (temp != NULL) {
+        soma += temp->dado;
+        temp = temp->prox;
+    }
+    return (float)soma / d->n;
+}
+
+// Função para remover o primeiro nó com valor imediatamente superior ao valor médio
+void removerSuperiorMedia(struct descritor *d, float media) {
+    struct node *anterior = NULL;
+    struct node *atual = d->i;
+    while (atual != NULL && atual->dado <= media) {
+        anterior = atual;
+        atual = atual->prox;
+    }
+    if (atual != NULL) {
+        if (anterior == NULL) {
+            d->i = atual->prox;
+        } else {
+            anterior->prox = atual->prox;
+        }
+        free(atual);
+        d->n--;
+    }
+}
 
 int main(int argc, char *argv[]) {
-    int i = 0, nos,media;
+    int i = 0, nos;
     struct node *p, *lista;
     printf("Quantos nos deseja inserir? ");
     scanf("%i", &nos);
@@ -60,10 +83,10 @@ int main(int argc, char *argv[]) {
         p->dado = rand() % 99;
         p->prox = lista;
         lista = p;
-
+		
         // Inserir o elemento na lista ordenadamente
         inserirOrdenado(d, p->dado);
-
+		
         i++;
         printf("%i ", p->dado);
     } while (i < nos);
@@ -71,6 +94,22 @@ int main(int argc, char *argv[]) {
     printf("\nLista ordenada:\n");
     // Imprimir a lista ordenada
     struct node *temp = d->i;
+    while (temp != NULL) {
+        printf("%i ", temp->dado);
+        temp = temp->prox;
+    }
+    printf("\n");
+
+    // Calcular o valor médio dos nós na lista
+    float media = calcularMedia(d);
+    printf("Valor medio: %.2f\n", media);
+
+    // Remover o primeiro nó com valor imediatamente superior ao valor médio
+    removerSuperiorMedia(d, media);
+
+    printf("Lista com descritor final:\n");
+    // Imprimir a lista com descritor final
+    temp = d->i;
     while (temp != NULL) {
         printf("%i ", temp->dado);
         temp = temp->prox;
