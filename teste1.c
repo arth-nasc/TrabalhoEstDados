@@ -1,6 +1,8 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 struct node {
 	int dado;
 	struct node *prox;
@@ -12,7 +14,7 @@ struct descritor{
 };
 
 int main(int argc, char *argv[]) {
-	int i,nos;
+	int i,nos,med;
 	struct node *p, *q,*lista;
 	printf("Quantos nos deseja inserir? ");
 	scanf("%i", &nos);
@@ -34,22 +36,25 @@ int main(int argc, char *argv[]) {
 		p->prox = lista;
 		lista=p;
 		//Inserir numa lista com descritor em ordem:
-		//(newnode=p)(sorted=q)(head=lista)
-		//struct node* current = sorted;
-        /* Locate the node before the point of insertion
-         */
-        //while (current->next != NULL
-        //      && current->next->data < newnode->data) {
-        //    current = current->next;
-        //}
-        //newnode->next = current->next;
-        //current->next = newnode;
+	    
 		//Transferir para ordem crescente 
 		//Jogar para lista com descritor.
 		//Fazer media como int
-		//Buscar lista toda e deletar numero imediatamente superior a media.
-		//Reordena a lista novamente.
 		
+	    for (i=0;i++;){
+	        p=p->dado;
+        //Buscar lista toda e deletar numero imediatamente superior a media.
+
+	        if (p->dado>med){
+	            free(p->dado);
+	            free(p->prox);
+	            break;
+	        }
+	        
+        //Organizar lista novamente, usando-se as funções da lista com descritor
+	    }
+	   //Organizar lista novamente, usando-se as funções da lista com descritor
+
 		/*if(d->n==0){
 			d->i = p;
 			d->f = p;
@@ -62,9 +67,9 @@ int main(int argc, char *argv[]) {
 			d->n++;			
 		*/
 		i++;
-		printf("%i ",p->dado);
+        printf("%i ",p->dado);
+
 	}while(i<nos);
-	
 	
 	return 0;
 }
